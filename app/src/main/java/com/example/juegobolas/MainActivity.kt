@@ -2,6 +2,7 @@ package com.example.juegobolas
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.DisplayMetrics
 import com.example.juegobolas.entities.Bola
 import com.example.juegobolas.tablero.Tablero
 import com.example.juegobolas.tablero.TableroView
@@ -11,16 +12,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val tablero = Tablero(800, 600)  // Crear un tablero con ancho 800 y alto 600
+        // Obtener el tamaño de la pantalla
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val screenWidth = displayMetrics.widthPixels
+        val screenHeight = displayMetrics.heightPixels
 
-        val bola1 = Bola(100, 100, 5, 3, "#FF0000")  // Crear una bola roja
-        val bola2 = Bola(200, 200, 3, 5, "#0000FF")  // Crear una bola azul
+        val tablero = Tablero(screenWidth, screenHeight)  // Crear un <link>tablero</link> con el ancho y alto de la pantalla
+
+
+        val bola1 = Bola(100, 100, 5, 3, "#FF0000", 20f)  // Crear una bola roja
+        val bola2 = Bola(200, 200, 3, 5, "#0000FF", 20f)  // Crear una bola azul
 
         tablero.agregarBola(bola1)
         tablero.agregarBola(bola2)
 
         val tableroView = TableroView(this, tablero)
         setContentView(tableroView)  // Establecer la vista personalizada como el contenido de la actividad
+
+        tableroView.setOnTouchListener { _, event ->
+            tableroView.onTouchEvent(event)  // Delegar el evento táctil a TableroView
+        }
 
         // Configurar un temporizador para actualizar el tablero y redibujar las bolas
         val timer = Timer()
