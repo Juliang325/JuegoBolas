@@ -8,10 +8,19 @@ class Tablero(var ancho: Int, var alto: Int) {
         bolas.add(bola)
     }
     fun actualizar() {
+        val bolasNuevas = mutableListOf<Bola>()  // Lista temporal para almacenar las bolas que deben ser eliminadas
         for (bola in bolas) {
 
             bola.mover(ancho, alto)  // Llamar al método mover de la clase Bola
             // Aquí puedes agregar lógica para detectar colisiones entre las bolas, interacción con el usuario, etc.
+            if (bola.radio >= 200){
+                bola.reproducir()
+                bolasNuevas.add(bola.reproducir())
+            }
+        }
+        // Añadir las bolas que deben ser creadas
+        for (bolaACrear in bolasNuevas) {
+            bolas.add(bolaACrear)
         }
     }
 

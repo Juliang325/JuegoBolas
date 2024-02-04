@@ -12,11 +12,11 @@ class TableroView(context: Context, val tablero: Tablero) : View(context) {
 
     private val paint = Paint()
 
-    // Sobreescribir el método onSizeChanged para ajustar el tamaño del <link>tablero</link>
+    // Sobreescribir el método onSizeChanged para ajustar el tamaño del tablero
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        tablero.ancho = w  // Actualizar el ancho del <link>tablero</link> con el ancho de la pantalla
-        tablero.alto = h  // Actualizar el alto del <link>tablero</link> con el alto de la pantalla
+        tablero.ancho = w  // Actualizar el ancho del tablero con el ancho de la pantalla
+        tablero.alto = h  // Actualizar el alto del tablero con el alto de la pantalla
     }
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
